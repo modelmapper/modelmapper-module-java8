@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>datetime</module>
+  </modules>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  <packaging>pom</packaging>
+  <groupId>org.modelmapper</groupId>
+  <artifactId>modelmapper-module-java8</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>ModelMapper Module Java8</name>
+  <description>ModelMapper Module for Java8</description>
+  <url>http://modelmapper.org</url>
+  <inceptionYear>2018</inceptionYear>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <modelmapper.version>2.0.1-SNAPSHOT</modelmapper.version>
+    <lombok.version>1.18.0</lombok.version>
+    <testng.version>6.9.10</testng.version>
+  </properties>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Chun Han Hsiao</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:chhsiao90/modelmapper-module-java8.git</connection>
+    <developerConnection>scm:git:git@github.com:chhsiao90/modelmapper-module-java8.git</developerConnection>
+    <url>http://github.com/chhsiao90/modelmapper-module-java8/</url>
+  </scm>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>http://github.com/chhsiao90/modelmapper-module-java8/issues</url>
+  </issueManagement>
+  <mailingLists>
+    <mailingList>
+      <name>ModelMapper List</name>
+      <archive>http://groups.google.com/group/modelmapper/topics</archive>
+      <subscribe>http://groups.google.com/group/modelmapper/subscribe</subscribe>
+      <unsubscribe>http://groups.google.com/group/modelmapper/subscribe</unsubscribe>
+      <post>http://groups.google.com/group/modelmapper/post</post>
+    </mailingList>
+  </mailingLists>
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${testng.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>${modelmapper.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
