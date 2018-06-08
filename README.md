@@ -1,6 +1,6 @@
 # ModelMapper Module for Java8
 
-[![Build Status](https://travis-ci.org/modelmapper/modelmapper.svg)](https://travis-ci.org/chhsiao90/modelmapper-module-java8) 
+[![Build Status](https://travis-ci.org/chhsiao90/modelmapper-module-java8.svg)](https://travis-ci.org/chhsiao90/modelmapper-module-java8) 
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 This is a module for [ModelMapper](http://modelmapper.org) to support Java 8 features.
