@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Config for {@link Jsr310Module}
+ *
+ * @author Chun Han Hsiao
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -14,6 +14,11 @@ import org.modelmapper.internal.Errors;
 import org.modelmapper.spi.ConditionalConverter;
 import org.modelmapper.spi.MappingContext;
 
+/**
+ * Converts  {@link Temporal} to {@link Object}
+ *
+ * @author Chun Han
+ */
 public class FromTemporalConverter implements ConditionalConverter<Temporal, Object> {
   private Jsr310ModuleConfig config;
   private final LocalDateTimeConverter localDateTimeConverter = new LocalDateTimeConverter();

@@ -5,6 +5,11 @@ import org.modelmapper.internal.Errors;
 import org.modelmapper.spi.ConditionalConverter;
 import org.modelmapper.spi.MappingContext;
 
+/**
+ * Converts  {@link Temporal} to {@link Temporal}
+ *
+ * @author Chun Han
+ */
 public class TemporalToTemporalConverter implements ConditionalConverter<Temporal, Temporal> {
   @Override
   public MatchResult match(Class<?> sourceType, Class<?> destinationType) {

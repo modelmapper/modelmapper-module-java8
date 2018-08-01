@@ -3,6 +3,11 @@ package org.modelmapper.module.jsr310;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.Module;
 
+/**
+ * Supports the JSR310 {@code java.time} objects with  ModelMapper
+ *
+ * @author Chun Han Hsiao
+ */
 public class Jsr310Module implements Module {
   private Jsr310ModuleConfig config;
 
