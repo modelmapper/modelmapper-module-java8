@@ -11,7 +11,7 @@ import org.modelmapper.Module;
 public class Jdk8Module implements Module {
   @Override
   public void setupModule(ModelMapper modelMapper) {
-    modelMapper.getConfiguration().getConverters().add(0, new FromOptionalConverter(modelMapper));
-    modelMapper.getConfiguration().getConverters().add(0, new ToOptionalConverter(modelMapper));
+    modelMapper.getConfiguration().getConverters().add(0, new FromOptionalConverter());
+    modelMapper.getConfiguration().getConverters().add(0, new ToOptionalConverter());
   }
 }
