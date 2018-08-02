@@ -8,7 +8,7 @@ import org.modelmapper.spi.MappingContext;
 /**
  * Converts  {@link Temporal} to {@link Temporal}
  *
- * @author Chun Han
+ * @author Chun Han Hsiao
  */
 public class TemporalToTemporalConverter implements ConditionalConverter<Temporal, Temporal> {
   @Override

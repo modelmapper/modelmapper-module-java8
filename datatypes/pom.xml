@@ -7,11 +7,10 @@
     <groupId>org.modelmapper</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <packaging>jar</packaging>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>modelmapper-module-jsr310</artifactId>
-  <name>ModelMapper Module JSR310</name>
-  <description>ModelMapper Module for JSR310</description>
+  <artifactId>modelmapper-module-java8-datatypes</artifactId>
+  <name>ModelMapper Module Java8 Data Types</name>
+  <description>ModelMapper Module for Java8 Data Types</description>
   <dependencies>
     <dependency>
       <groupId>org.modelmapper</groupId>

@@ -17,7 +17,7 @@ import org.modelmapper.spi.MappingContext;
 /**
  * Converts  {@link Temporal} to {@link Object}
  *
- * @author Chun Han
+ * @author Chun Han Hsiao
  */
 public class FromTemporalConverter implements ConditionalConverter<Temporal, Object> {
   private Jsr310ModuleConfig config;
