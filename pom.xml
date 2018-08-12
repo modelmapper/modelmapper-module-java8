@@ -23,7 +23,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <modelmapper.version>2.1.1-SNAPSHOT</modelmapper.version>
+    <modelmapper.version>2.1.1</modelmapper.version>
     <lombok.version>1.18.0</lombok.version>
     <testng.version>6.9.10</testng.version>
   </properties>
