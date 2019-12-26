@@ -1,4 +1,6 @@
 language: java
+sudo: required
+dist: trusty
 
 jdk:
   - oraclejdk8
@@ -11,5 +13,3 @@ notifications:
 branches:
   only:
     - master
-
-sudo: false
