@@ -13,5 +13,6 @@ public class Jdk8Module implements Module {
   public void setupModule(ModelMapper modelMapper) {
     modelMapper.getConfiguration().getConverters().add(0, new FromOptionalConverter());
     modelMapper.getConfiguration().getConverters().add(0, new ToOptionalConverter());
+    modelMapper.getConfiguration().getConverters().add(0, new FromOptionalToOptionalConverter());
   }
 }
