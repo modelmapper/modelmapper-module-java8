@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
   <groupId>com.github.chhsiao90</groupId>
   <artifactId>modelmapper-module-java8</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1-SNAPSHOT</version>
   <name>ModelMapper Module Java8</name>
   <description>ModelMapper Module for Java8</description>
   <url>http://modelmapper.org</url>
