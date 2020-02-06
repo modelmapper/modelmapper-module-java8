@@ -103,7 +103,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     Class<?> sourceType = source.getClass();
     if (sourceType.equals(String.class))
       return OffsetDateTime.parse((String) source,
-              DateTimeFormatter.ofPattern(config.getDateTimePattern()));
+              DateTimeFormatter.ofPattern(config.getDateTimeOffsetPattern()));
     return convertInstant(mappingContext).atZone(config.getZoneId()).toOffsetDateTime();
   }
 

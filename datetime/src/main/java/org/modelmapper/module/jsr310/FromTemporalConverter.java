@@ -108,7 +108,7 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
   private Object convertOffsetDateTime(OffsetDateTime source, MappingContext<?, ?> mappingContext) {
     Class<?> destinationType = mappingContext.getDestinationType();
     if (destinationType.equals(String.class))
-      return DateTimeFormatter.ofPattern(config.getDateTimePattern())
+      return DateTimeFormatter.ofPattern(config.getDateTimeOffsetPattern())
               .format(source);
 
     Instant instant = source.toInstant();
