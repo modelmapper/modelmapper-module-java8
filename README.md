@@ -43,6 +43,12 @@ modelMapper.registerModule(new Jsr310Module(config));
 | LocalDate     | BigInteger       |
 | LocalDate     | Date             |
 | LocalDate     | Calendar         |
+| OffsetDateTime| String           |
+| OffsetDateTime| Long/long        |
+| OffsetDateTime| BigDecimal       |
+| OffsetDateTime| BigInteger       |
+| OffsetDateTime| Date             |
+| OffsetDateTime| Calendar         |
 | Instant       | String           |
 | Instant       | Long/long        |
 | Instant       | BigDecimal       |
@@ -61,6 +67,12 @@ modelMapper.registerModule(new Jsr310Module(config));
 | BigInteger    | DateTine         |
 | Date          | DateTine         |
 | Calendar      | DateTine         |
+| String        | OffsetDateTime   |
+| Long/long     | OffsetDateTime   |
+| BigDecimal    | OffsetDateTime   |
+| BigInteger    | OffsetDateTime   |
+| Date          | OffsetDateTime   |
+| Calendar      | OffsetDateTime   |
 | String        | Instant          |
 | Long/long     | Instant          |
 | BigDecimal    | Instant          |
