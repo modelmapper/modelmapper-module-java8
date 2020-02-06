@@ -1,6 +1,7 @@
 package org.modelmapper.module.jsr310;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -81,5 +82,10 @@ public class FromLocalDateConverterTest {
         .toLocalDate();
     Calendar timestamp = (Calendar) converter.convert(TestHelper.unsafeMappingContext(source, LocalDate.class, Calendar.class));
     assertEquals(timestamp.getTime().getTime(), 1514764800000L);
+  }
+
+  public void shouldConvertNull() {
+    Calendar timestamp = (Calendar) converter.convert(TestHelper.unsafeMappingContext(null, LocalDate.class, Calendar.class));
+    assertNull(timestamp);
   }
 }
