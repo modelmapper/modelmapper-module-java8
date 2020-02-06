@@ -12,7 +12,7 @@ public class Jsr310Module implements Module {
   private Jsr310ModuleConfig config;
 
   public Jsr310Module() {
-    this(new Jsr310ModuleConfig());
+    this(Jsr310ModuleConfig.builder().build());
   }
 
   public Jsr310Module(Jsr310ModuleConfig config) {

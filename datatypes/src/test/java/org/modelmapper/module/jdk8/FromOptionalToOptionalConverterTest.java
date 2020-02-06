@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 import java.util.Optional;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 @Test
 public class FromOptionalToOptionalConverterTest {
@@ -32,12 +33,13 @@ public class FromOptionalToOptionalConverterTest {
   @AllArgsConstructor
   @SuppressWarnings("all")
   static class Source {
-    Optional<Field> field;
+    private Optional<Field> field;
   }
 
   @Data
+  @SuppressWarnings("all")
   static class Destination {
-    Optional<FieldDto> field;
+    private Optional<FieldDto> field;
   }
 
   @BeforeMethod
@@ -61,8 +63,14 @@ public class FromOptionalToOptionalConverterTest {
     assertEquals(modelMapper.map(Optional.of("100"), type), Optional.of(100));
   }
 
+  @SuppressWarnings("all")
   public void shouldMapOptionalPropertyToOtherOptionalProperty() {
     Destination destination = modelMapper.map(new Source(Optional.of(new Field("foo"))), Destination.class);
     assertEquals(destination.getField().get().getValue(), "FOO");
+  }
+
+  public void shouldMapNullToNull() {
+    Destination destination = modelMapper.map(new Source(null), Destination.class);
+    assertNull(destination.getField());
   }
 }
