@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Converts  {@link Optional} to {@link Optional}
  */
-public class FromOptionalToOptionalConverter implements ConditionalConverter<Optional, Optional> {
+public class FromOptionalToOptionalConverter implements ConditionalConverter<Optional<?>, Optional<?>> {
   @Override
   public MatchResult match(Class<?> sourceType, Class<?> destinationType) {
     return (Optional.class.equals(sourceType) && Optional.class.equals(destinationType))
@@ -23,20 +23,22 @@ public class FromOptionalToOptionalConverter implements ConditionalConverter<Opt
   }
 
   @Override
-  public Optional<?> convert(MappingContext<Optional, Optional> mappingContext) {
+  @SuppressWarnings("all")
+  public Optional<?> convert(MappingContext<Optional<?>, Optional<?>> mappingContext) {
     Class<?> optionalType = getElementType(mappingContext);
-    Optional source = mappingContext.getSource();
-    Object dest = null;
-    if (source != null && source.isPresent()) {
+    Optional<?> source = mappingContext.getSource();
+    if (source == null) {
+      return null;
+    } else if (source.isPresent()) {
       MappingContext<?, ?> optionalContext = mappingContext.create(source.get(), optionalType);
-      dest = mappingContext.getMappingEngine().map(optionalContext);
+      return Optional.ofNullable(mappingContext.getMappingEngine().map(optionalContext));
+    } else {
+      return Optional.empty();
     }
-
-    return Optional.ofNullable(dest);
   }
 
 
-  private Class<?> getElementType(MappingContext<Optional, Optional> mappingContext) {
+  private Class<?> getElementType(MappingContext<Optional<?>, Optional<?>> mappingContext) {
     Mapping mapping = mappingContext.getMapping();
     if (mapping instanceof PropertyMapping) {
       PropertyInfo destInfo = mapping.getLastDestinationProperty();
