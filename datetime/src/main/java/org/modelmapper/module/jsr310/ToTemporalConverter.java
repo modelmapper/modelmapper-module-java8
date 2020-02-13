@@ -3,6 +3,7 @@ package org.modelmapper.module.jsr310;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.Calendar;
@@ -21,6 +22,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
   private Jsr310ModuleConfig config;
   private final LocalDateTimeConverter localDateTimeConverter = new LocalDateTimeConverter();
   private final LocalDateConverter localDateConverter = new LocalDateConverter();
+  private final OffsetDateTimeConverter offsetDateTimeConverter = new OffsetDateTimeConverter();
   private final InstantConverter instantConverter = new InstantConverter();
 
   public ToTemporalConverter(Jsr310ModuleConfig config) {
@@ -40,6 +42,8 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
       return localDateTimeConverter.convert(mappingContext);
     else if (LocalDate.class.equals(destinationType))
       return localDateConverter.convert(mappingContext);
+    else if (OffsetDateTime.class.equals(destinationType))
+      return offsetDateTimeConverter.convert(mappingContext);
     else if (Instant.class.equals(destinationType))
       return instantConverter.convert(mappingContext);
     else
@@ -59,6 +63,13 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     @Override
     public Temporal convert(MappingContext<Object, Temporal> mappingContext) {
       return convertLocalDate(mappingContext);
+    }
+  }
+
+  private class OffsetDateTimeConverter implements Converter<Object, Temporal> {
+    @Override
+    public Temporal convert(MappingContext<Object, Temporal> mappingContext) {
+      return convertOffsetDateTime(mappingContext);
     }
   }
 
@@ -85,6 +96,15 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
       return LocalDateTime.parse((String) source,
           DateTimeFormatter.ofPattern(config.getDateTimePattern()));
     return convertInstant(mappingContext).atZone(config.getZoneId()).toLocalDateTime();
+  }
+
+  private OffsetDateTime convertOffsetDateTime(MappingContext<?, ?> mappingContext) {
+    Object source = mappingContext.getSource();
+    Class<?> sourceType = source.getClass();
+    if (sourceType.equals(String.class))
+      return OffsetDateTime.parse((String) source,
+              DateTimeFormatter.ofPattern(config.getDateTimeOffsetPattern()));
+    return convertInstant(mappingContext).atZone(config.getZoneId()).toOffsetDateTime();
   }
 
   private Instant convertInstant(MappingContext<?, ?> mappingContext) {
