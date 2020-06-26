@@ -22,7 +22,7 @@ We also support for configuration.
 Jsr310ModuleConfig config = Jsr310ModuleConfig.builder()
     .dateTimePattern("yyyy-MM-dd HH:mm:ss") // default is yyyy-MM-dd HH:mm:ss
     .datePattern("yyyy-MM-dd") // default is yyyy-MM-dd
-    .zoneId(ZoneOffset.UTF) // default is ZoneId.systemDefault()
+    .zoneId(ZoneOffset.UTC) // default is ZoneId.systemDefault()
     .build()
 modelMapper.registerModule(new Jsr310Module(config));
 ```
