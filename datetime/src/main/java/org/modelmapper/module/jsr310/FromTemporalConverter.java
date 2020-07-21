@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +70,7 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
       LocalDate source = (LocalDate) mappingContext.getSource();
       Class<?> destinationType = mappingContext.getDestinationType();
       if (destinationType.equals(String.class))
-        return DateTimeFormatter.ofPattern(config.getDatePattern())
+        return config.getDateFormatter()
             .format(source);
 
       LocalDateTime localDateTime = source.atStartOfDay();
@@ -98,7 +97,7 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
   private Object convertLocalDateTime(LocalDateTime source, MappingContext<?, ?> mappingContext) {
     Class<?> destinationType = mappingContext.getDestinationType();
     if (destinationType.equals(String.class))
-      return DateTimeFormatter.ofPattern(config.getDateTimePattern())
+      return config.getDateTimeFormatter()
           .format(source);
 
     Instant instant = source.atZone(config.getZoneId()).toInstant();
@@ -108,7 +107,7 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
   private Object convertOffsetDateTime(OffsetDateTime source, MappingContext<?, ?> mappingContext) {
     Class<?> destinationType = mappingContext.getDestinationType();
     if (destinationType.equals(String.class))
-      return DateTimeFormatter.ofPattern(config.getDateTimeOffsetPattern())
+      return config.getDateTimeOffsetFormatter()
               .format(source);
 
     Instant instant = source.toInstant();
@@ -118,7 +117,7 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
   private Object convertInstant(Instant source, MappingContext<?, ?> mappingContext) {
     Class<?> destinationType = mappingContext.getDestinationType();
     if (destinationType.equals(String.class))
-      return DateTimeFormatter.ofPattern(config.getDateTimePattern())
+      return config.getDateTimeFormatter()
           .withZone(config.getZoneId())
           .format(source);
     else if (Date.class.isAssignableFrom(destinationType))
