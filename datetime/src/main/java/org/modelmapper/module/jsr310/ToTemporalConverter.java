@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Date;
@@ -85,7 +84,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     Class<?> sourceType = source.getClass();
     if (sourceType.equals(String.class))
       return LocalDate.parse((String) source,
-          DateTimeFormatter.ofPattern(config.getDatePattern()));
+          config.getDateFormatter());
     return convertInstant(mappingContext).atZone(config.getZoneId()).toLocalDate();
   }
 
@@ -94,7 +93,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     Class<?> sourceType = source.getClass();
     if (sourceType.equals(String.class))
       return LocalDateTime.parse((String) source,
-          DateTimeFormatter.ofPattern(config.getDateTimePattern()));
+          config.getDateTimeFormatter());
     return convertInstant(mappingContext).atZone(config.getZoneId()).toLocalDateTime();
   }
 
@@ -103,7 +102,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     Class<?> sourceType = source.getClass();
     if (sourceType.equals(String.class))
       return OffsetDateTime.parse((String) source,
-              DateTimeFormatter.ofPattern(config.getDateTimeOffsetPattern()));
+              config.getDateTimeOffsetFormatter());
     return convertInstant(mappingContext).atZone(config.getZoneId()).toOffsetDateTime();
   }
 
@@ -112,7 +111,7 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
     Class<?> sourceType = source.getClass();
     if (sourceType.equals(String.class))
       return LocalDateTime.parse((String) source,
-          DateTimeFormatter.ofPattern(config.getDateTimePattern()))
+          config.getDateTimeFormatter())
           .atZone(config.getZoneId()).toInstant();
     else if (Date.class.isAssignableFrom(sourceType))
       return Instant.ofEpochMilli(((Date) source).getTime());
