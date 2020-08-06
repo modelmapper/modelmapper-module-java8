@@ -19,10 +19,20 @@ modelMapper.registerModule(new Jsr310Module());
 We also support for configuration.
 
 ```java
+// using String patterns
 Jsr310ModuleConfig config = Jsr310ModuleConfig.builder()
     .dateTimePattern("yyyy-MM-dd HH:mm:ss") // default is yyyy-MM-dd HH:mm:ss
     .datePattern("yyyy-MM-dd") // default is yyyy-MM-dd
     .zoneId(ZoneOffset.UTC) // default is ZoneId.systemDefault()
+    .build()
+modelMapper.registerModule(new Jsr310Module(config));
+```
+```java
+// using DateTimeFormatter directly
+Jsr310ModuleConfig config = Jsr310ModuleConfig.builder()
+    .dateTimeFormatter(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    .dateFormatter(DateTimeFormatter.ISO_LOCAL_DATE)
+    .zoneId(ZoneOffset.UTC)
     .build()
 modelMapper.registerModule(new Jsr310Module(config));
 ```
