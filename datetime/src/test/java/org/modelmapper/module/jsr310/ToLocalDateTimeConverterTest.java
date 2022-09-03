@@ -1,6 +1,7 @@
 package org.modelmapper.module.jsr310;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -75,5 +76,11 @@ public class ToLocalDateTimeConverterTest {
     LocalDateTime localDateTime = (LocalDateTime) converter.convert(TestHelper.unsafeMappingContext(
         calendar, Calendar.class, LocalDateTime.class));
     assertEquals(localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli(), 1514764800000L);
+  }
+
+  public void shouldConvertNull() {
+    LocalDateTime timestamp = (LocalDateTime) converter.convert(TestHelper.unsafeMappingContext(
+            null, Date.class, LocalDateTime.class));
+    assertNull(timestamp);
   }
 }

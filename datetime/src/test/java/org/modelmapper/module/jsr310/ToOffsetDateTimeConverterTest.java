@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 @Test
 public class ToOffsetDateTimeConverterTest {
@@ -75,5 +76,11 @@ public class ToOffsetDateTimeConverterTest {
     OffsetDateTime offsetDateTime = (OffsetDateTime) converter.convert(TestHelper.unsafeMappingContext(
         calendar, Calendar.class, OffsetDateTime.class));
     assertEquals(offsetDateTime.toInstant().toEpochMilli(), 1514764800000L);
+  }
+
+  public void shouldConvertNull() {
+    OffsetDateTime timestamp = (OffsetDateTime) converter.convert(TestHelper.unsafeMappingContext(
+            null, Date.class, OffsetDateTime.class));
+    assertNull(timestamp);
   }
 }
