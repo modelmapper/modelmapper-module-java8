@@ -34,9 +34,9 @@ public class ToTemporalConverter implements ConditionalConverter<Object, Tempora
 
   @Override
   public Temporal convert(MappingContext<Object, Temporal> mappingContext) {
-    if(mappingContext.getSource() == null) {
+    if (mappingContext.getSource() == null)
       return null;
-    }
+
     Class<?> destinationType = mappingContext.getDestinationType();
     if (LocalDateTime.class.equals(destinationType))
       return localDateTimeConverter.convert(mappingContext);

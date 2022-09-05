@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 @Test
 public class ToInstantConverterTest {
@@ -75,5 +76,11 @@ public class ToInstantConverterTest {
     Instant instant = (Instant) converter.convert(TestHelper.unsafeMappingContext(
         calendar, Calendar.class, Instant.class));
     assertEquals(instant.toEpochMilli(), 1514764800000L);
+  }
+
+  public void shouldConvertNull() {
+    Instant timestamp = (Instant) converter.convert(TestHelper.unsafeMappingContext(
+            null, Date.class, Instant.class));
+    assertNull(timestamp);
   }
 }
