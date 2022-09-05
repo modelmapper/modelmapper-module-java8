@@ -2,10 +2,7 @@ package org.modelmapper.module.jsr310;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.time.*;
 import java.time.temporal.Temporal;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +19,7 @@ import org.modelmapper.spi.MappingContext;
 public class FromTemporalConverter implements ConditionalConverter<Temporal, Object> {
   private Jsr310ModuleConfig config;
   private final LocalDateTimeConverter localDateTimeConverter = new LocalDateTimeConverter();
+  private final ZonedDateTimeConverter zonedDateTimeConverter = new ZonedDateTimeConverter();
   private final LocalDateConverter localDateConverter = new LocalDateConverter();
   private final OffsetDateTimeConverter offsetDateTimeConverter = new OffsetDateTimeConverter();
   private final InstantConverter instantConverter = new InstantConverter();
@@ -50,6 +48,8 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
       return offsetDateTimeConverter.convert(mappingContext);
     else if (Instant.class.equals(sourceType))
       return instantConverter.convert(mappingContext);
+    else if (ZonedDateTime.class.equals(sourceType))
+      return zonedDateTimeConverter.convert(mappingContext);
     else
       throw new Errors().addMessage("Unsupported mapping types[%s->%s]",
           LocalDateTime.class.getName(), mappingContext.getDestinationType().getName())
@@ -61,6 +61,14 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
     public Object convert(MappingContext<Temporal, Object> mappingContext) {
       LocalDateTime source = (LocalDateTime) mappingContext.getSource();
       return convertLocalDateTime(source, mappingContext);
+    }
+  }
+
+  private class ZonedDateTimeConverter implements Converter<Temporal, Object> {
+    @Override
+    public Object convert(MappingContext<Temporal, Object> mappingContext) {
+      ZonedDateTime source = (ZonedDateTime) mappingContext.getSource();
+      return convertZonedDateTime(source, mappingContext);
     }
   }
 
@@ -103,6 +111,17 @@ public class FromTemporalConverter implements ConditionalConverter<Temporal, Obj
     Instant instant = source.atZone(config.getZoneId()).toInstant();
     return convertInstant(instant, mappingContext);
   }
+
+  private Object convertZonedDateTime(ZonedDateTime source, MappingContext<?, ?> mappingContext) {
+    Class<?> destinationType = mappingContext.getDestinationType();
+    if (destinationType.equals(String.class))
+      return config.getDateTimeOffsetFormatter()
+              .format(source);
+
+    Instant instant = source.toInstant();
+    return convertInstant(instant, mappingContext);
+  }
+
 
   private Object convertOffsetDateTime(OffsetDateTime source, MappingContext<?, ?> mappingContext) {
     Class<?> destinationType = mappingContext.getDestinationType();
